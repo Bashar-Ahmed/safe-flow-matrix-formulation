@@ -28,7 +28,7 @@ Khan and Tomescu [1] characterise *safe* paths in a flow DAG â€” those appearing
 
 The quantity has a closed form. Writing $T$ and $H$ for the unsigned tail and head incidence matrices and $f$ for the flow,
 
-$$\boxed{\;f_P \;=\; f_{\mathrm{out}}(u_1)\;-\;\lambda^\top x_P\;,\qquad \lambda \;=\; (T^\top T - I)\,f \;\ge\; 0\;}$$
+$$\boxed{f_P = f_{\mathrm{out}}(u_1)-\lambda^\top x_P,\qquad \lambda = (T^\top T - I)\,f \ge 0}$$
 
 where $x_P$ is the path's edge-indicator vector. A budget granted at the first vertex, minus a fixed linear cost accumulated over the edges traversed. The rest of this report is consequences.
 
@@ -66,7 +66,7 @@ A decomposition $\mathcal{D}$ is a set of weighted source-to-sink paths whose pe
 
 $$
 \begin{array}{rl}
-\displaystyle P \text{ is } w\text{-safe} \iff \min_{\mathcal{D}} W(P,\mathcal{D}) \;\ge\; w > 0. & \qquad (2)
+\displaystyle P \text{ is } w\text{-safe} \iff \min_{\mathcal{D}} W(P,\mathcal{D}) \ge w > 0. & \qquad (2)
 \end{array}
 $$
 
@@ -78,7 +78,7 @@ The guarantee is against an adversary who chooses the decomposition after seeing
 
 $$
 \begin{array}{rl}
-\displaystyle f_P \;=\; f^\top x_P \;-\; f_{\mathrm{out}}^\top y_P, & \qquad (3)
+\displaystyle f_P = f^\top x_P - f_{\mathrm{out}}^\top y_P, & \qquad (3)
 \end{array}
 $$
 
@@ -98,7 +98,7 @@ Equation (3) appears to require two independent descriptions of a path: an edge 
 
 $$
 \begin{array}{rl}
-\displaystyle y_P \;=\; T x_P - \delta_{u_1} \;=\; H x_P - \delta_{u_k}. & \qquad (4)
+\displaystyle y_P = T x_P - \delta_{u_1} = H x_P - \delta_{u_k}. & \qquad (4)
 \end{array}
 $$
 
@@ -108,7 +108,7 @@ $$
 
 $$
 \begin{array}{rl}
-\displaystyle f_P \;=\; f_{\mathrm{out}}(u_1) \;-\; \lambda^\top x_P. & \qquad (5)
+\displaystyle f_P = f_{\mathrm{out}}(u_1) - \lambda^\top x_P. & \qquad (5)
 \end{array}
 $$
 
@@ -134,7 +134,7 @@ For nonnegativity, $(S_{\mathrm{out}}f)_e = \sum_{g:\ \mathrm{tail}(g)=\mathrm{t
 
 $$
 \begin{array}{rl}
-\displaystyle \lambda_e \;=\; \sum_{g \ne e,\ \mathrm{tail}(g)=\mathrm{tail}(e)} f(g), & \qquad (6)
+\displaystyle \lambda_e = \sum_{g \ne e,\ \mathrm{tail}(g)=\mathrm{tail}(e)} f(g), & \qquad (6)
 \end{array}
 $$
 
@@ -148,7 +148,7 @@ The $m \times m$ object is a proof device. The quantity it names is a grouped su
 
 $$
 \begin{array}{rl}
-\displaystyle f_P \;=\; f_{\mathrm{in}}(u_k) \;-\; \mu^\top x_P. & \qquad (7)
+\displaystyle f_P = f_{\mathrm{in}}(u_k) - \mu^\top x_P. & \qquad (7)
 \end{array}
 $$
 
@@ -218,7 +218,7 @@ $\lambda = (S_{\mathrm{out}} - I)f$ is linear in $f$ with a constant matrix, so 
 
 $$
 \begin{array}{rl}
-\displaystyle f_P \;=\; f^\top\!\left[\,T^\top\delta_{u_1} - (S_{\mathrm{out}} - I)\,x_P\,\right]. & \qquad (11)
+\displaystyle f_P = f^\top\!\left[\,T^\top\delta_{u_1} - (S_{\mathrm{out}} - I)\,x_P\,\right]. & \qquad (11)
 \end{array}
 $$
 
@@ -228,7 +228,7 @@ Linear in $f$ for a fixed path; linear in $x_P$ for a fixed flow. The bracket is
 
 $$
 \begin{array}{rl}
-\displaystyle \max_x \; f_{\mathrm{out}}(s) - \lambda^\top x \quad\text{s.t.}\quad (H-T)x = \delta_t - \delta_s,\; x \ge 0. & \qquad (12)
+\displaystyle \max_x f_{\mathrm{out}}(s) - \lambda^\top x \quad\text{s.t.}\quad (H-T)x = \delta_t - \delta_s, x \ge 0. & \qquad (12)
 \end{array}
 $$
 
@@ -242,7 +242,7 @@ Set $L_{uv} = \min\{\lambda_e : e = (u,v)\}$, $+\infty$ if no such edge, and $L_
 
 $$
 \begin{array}{rl}
-\displaystyle L^{*} \;=\; \bigoplus_{k \ge 0} L^{\otimes k} \;=\; (I \oplus L)^{\otimes(n-1)} & \qquad (13)
+\displaystyle L^{*} = \bigoplus_{k \ge 0} L^{\otimes k} = (I \oplus L)^{\otimes(n-1)} & \qquad (13)
 \end{array}
 $$
 
@@ -252,7 +252,7 @@ terminates on a DAG.
 
 $$
 \begin{array}{rl}
-\displaystyle F \;=\; f_{\mathrm{out}}\mathbf{1}^\top - L^{*}, \qquad \mathrm{Safe} = [F > 0], & \qquad (14)
+\displaystyle F = f_{\mathrm{out}}\mathbf{1}^\top - L^{*}, \qquad \mathrm{Safe} = [F > 0], & \qquad (14)
 \end{array}
 $$
 
@@ -272,7 +272,7 @@ Normalise the flow to the row-stochastic $M_{uv} = f(u,v)/f_{\mathrm{out}}(u)$ â
 
 $$
 \begin{array}{rl}
-\displaystyle R(P) \;=\; f(e_1)\prod_{j\ge 2} M_{e_j}, & \qquad (15)
+\displaystyle R(P) = f(e_1)\prod_{j\ge 2} M_{e_j}, & \qquad (15)
 \end{array}
 $$
 
@@ -342,7 +342,7 @@ The two leak vectors are the **unnormalised complements** of the two matrices: $
 
 $$
 \begin{array}{rl}
-\displaystyle f_P \;=\; \Phi\big[\,1 - \ell(1 - 1/d)\,\big], & \qquad (18)
+\displaystyle f_P = \Phi\big[\,1 - \ell(1 - 1/d)\,\big], & \qquad (18)
 \end{array}
 $$
 
