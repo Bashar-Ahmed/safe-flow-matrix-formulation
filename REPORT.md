@@ -52,7 +52,11 @@ Let $G = (V,E)$ be a directed acyclic multigraph, $n = |V|$, $m = |E|$, carrying
 
 Define the two **unsigned incidence matrices** $T, H \in \{0,1\}^{n\times m}$:
 
-$$T_{v,e} = 1 \iff v = \mathrm{tail}(e), \qquad H_{v,e} = 1 \iff v = \mathrm{head}(e). \tag{1}$$
+$$
+\begin{array}{rl}
+\displaystyle T_{v,e} = 1 \iff v = \mathrm{tail}(e), \qquad H_{v,e} = 1 \iff v = \mathrm{head}(e). & \qquad (1)
+\end{array}
+$$
 
 Then $f_{\mathrm{out}} = Tf$, $f_{\mathrm{in}} = Hf$, and flow conservation is the single linear constraint $(H-T)f = 0$ on internal vertices. A path $P = (u_1,\dots,u_k)$ with edges $e_1,\dots,e_{k-1}$ is carried by its **edge-indicator vector** $x_P \in \{0,1\}^m$; $\delta_v$ denotes a vertex one-hot.
 
@@ -60,7 +64,11 @@ Then $f_{\mathrm{out}} = Tf$, $f_{\mathrm{in}} = Hf$, and flow conservation is t
 
 A decomposition $\mathcal{D}$ is a set of weighted source-to-sink paths whose per-edge weight sums reproduce $f$. Decompositions are not unique, and the framework's premise is to report only what survives the choice. Writing $W(P,\mathcal{D})$ for the total weight of paths in $\mathcal{D}$ containing $P$ as a subpath:
 
-$$P \text{ is } w\text{-safe} \iff \min_{\mathcal{D}} W(P,\mathcal{D}) \;\ge\; w > 0. \tag{2}$$
+$$
+\begin{array}{rl}
+\displaystyle P \text{ is } w\text{-safe} \iff \min_{\mathcal{D}} W(P,\mathcal{D}) \;\ge\; w > 0. & \qquad (2)
+\end{array}
+$$
 
 The guarantee is against an adversary who chooses the decomposition after seeing the path. Nothing is claimed about a typical decomposition — a distinction that becomes the whole content of §8.
 
@@ -68,7 +76,11 @@ The guarantee is against an adversary who chooses the decomposition after seeing
 
 **Definition** (Khan–Tomescu, Definition 1 / Lemma 2b). For a path $P$,
 
-$$f_P \;=\; f^\top x_P \;-\; f_{\mathrm{out}}^\top y_P, \tag{3}$$
+$$
+\begin{array}{rl}
+\displaystyle f_P \;=\; f^\top x_P \;-\; f_{\mathrm{out}}^\top y_P, & \qquad (3)
+\end{array}
+$$
 
 where $y_P \in \{0,1\}^n$ indicates the **internal** vertices of $P$ — every vertex except the two endpoints.
 
@@ -84,13 +96,21 @@ Equation (3) appears to require two independent descriptions of a path: an edge 
 
 **Proposition 1.** For any path $P$ from $u_1$ to $u_k$,
 
-$$y_P \;=\; T x_P - \delta_{u_1} \;=\; H x_P - \delta_{u_k}. \tag{4}$$
+$$
+\begin{array}{rl}
+\displaystyle y_P \;=\; T x_P - \delta_{u_1} \;=\; H x_P - \delta_{u_k}. & \qquad (4)
+\end{array}
+$$
 
 *Proof.* $(Tx_P)_v$ counts the edges of $P$ leaving $v$. A path leaves each of $u_1,\dots,u_{k-1}$ exactly once and leaves $u_k$ never, so $Tx_P$ is the indicator of $\{u_1,\dots,u_{k-1}\}$; removing $\delta_{u_1}$ leaves the internal vertices. The second identity is the mirror argument on $H$, whose indicator is $\{u_2,\dots,u_k\}$. $\square$
 
 **Theorem 1.** Let $S_{\mathrm{out}} = T^\top T$ and $\lambda = (S_{\mathrm{out}} - I)f$. Then $\lambda \ge 0$ componentwise, $\lambda$ depends only on the flow, and for every path
 
-$$f_P \;=\; f_{\mathrm{out}}(u_1) \;-\; \lambda^\top x_P. \tag{5}$$
+$$
+\begin{array}{rl}
+\displaystyle f_P \;=\; f_{\mathrm{out}}(u_1) \;-\; \lambda^\top x_P. & \qquad (5)
+\end{array}
+$$
 
 *Proof.* Substituting the left identity of (4) into (3),
 
@@ -112,7 +132,11 @@ For nonnegativity, $(S_{\mathrm{out}}f)_e = \sum_{g:\ \mathrm{tail}(g)=\mathrm{t
 
 **Proposition 2 (the sibling matrix).** $(S_{\mathrm{out}})_{ef} = 1$ exactly when $e$ and $f$ share a tail vertex — the *siblings* of Khan–Tomescu §4. Ordering edges by tail makes $S_{\mathrm{out}}$ block diagonal, one all-ones block per vertex of size $\deg^+(v)$. Consequently
 
-$$\lambda_e \;=\; \sum_{g \ne e,\ \mathrm{tail}(g)=\mathrm{tail}(e)} f(g), \tag{6}$$
+$$
+\begin{array}{rl}
+\displaystyle \lambda_e \;=\; \sum_{g \ne e,\ \mathrm{tail}(g)=\mathrm{tail}(e)} f(g), & \qquad (6)
+\end{array}
+$$
 
 the total flow on $e$'s out-siblings.
 
@@ -122,7 +146,11 @@ The $m \times m$ object is a proof device. The quantity it names is a grouped su
 
 **Corollary 1 (the dual).** With $\mu = (S_{\mathrm{in}} - I)f$ and $S_{\mathrm{in}} = H^\top H$,
 
-$$f_P \;=\; f_{\mathrm{in}}(u_k) \;-\; \mu^\top x_P. \tag{7}$$
+$$
+\begin{array}{rl}
+\displaystyle f_P \;=\; f_{\mathrm{in}}(u_k) \;-\; \mu^\top x_P. & \qquad (7)
+\end{array}
+$$
 
 *Proof.* As Theorem 1, via the right identity of (4) together with $f_{\mathrm{out}}^\top y_P = f_{\mathrm{in}}^\top y_P$, which holds because $y_P$ selects internal vertices only, where conservation gives $f_{\mathrm{in}} = f_{\mathrm{out}}$. $\square$
 
@@ -146,17 +174,29 @@ This is Lemma 2(c), which the source paper proves separately and uses in every o
 
 By Theorem 1 the safety predicate is a threshold on a linear functional of the path's feature vector:
 
-$$P \text{ is safe} \iff \lambda^\top x_P < f_{\mathrm{out}}(u_1). \tag{8}$$
+$$
+\begin{array}{rl}
+\displaystyle P \text{ is safe} \iff \lambda^\top x_P < f_{\mathrm{out}}(u_1). & \qquad (8)
+\end{array}
+$$
 
 Maximality — that $P$ cannot be lengthened at either end while remaining safe — adds two thresholds of the same kind. Khan–Tomescu Lemma 2(d) states that if any incident extension keeps a path safe then the **maximum-weight** one does. In $\lambda$-coordinates the maximum-weight out-edge is the one with the *smallest* leak, so each candidate fan collapses to a per-vertex minimum, computable in one $O(m)$ pass:
 
-$$\lambda^{\min}_{\mathrm{out}}(v) = \min_{\mathrm{tail}(e)=v}\lambda_e, \qquad \mu^{\min}_{\mathrm{in}}(v) = \min_{\mathrm{head}(e)=v}\mu_e \tag{9}$$
+$$
+\begin{array}{rl}
+\displaystyle \lambda^{\min}_{\mathrm{out}}(v) = \min_{\mathrm{tail}(e)=v}\lambda_e, \qquad \mu^{\min}_{\mathrm{in}}(v) = \min_{\mathrm{head}(e)=v}\mu_e & \qquad (9)
+\end{array}
+$$
 
 (taken as $+\infty$ at sinks and sources respectively, so a path ending at a sink is right-maximal by convention).
 
 **Proposition 3.**
 
-$$\text{right-maximal} \iff f_P \le \lambda^{\min}_{\mathrm{out}}(u_k), \qquad \text{left-maximal} \iff f_P \le \mu^{\min}_{\mathrm{in}}(u_1). \tag{10}$$
+$$
+\begin{array}{rl}
+\displaystyle \text{right-maximal} \iff f_P \le \lambda^{\min}_{\mathrm{out}}(u_k), \qquad \text{left-maximal} \iff f_P \le \mu^{\min}_{\mathrm{in}}(u_1). & \qquad (10)
+\end{array}
+$$
 
 *Proof.* By Corollary 3, extending right by $e$ yields excess $f_P - \lambda_e$. Some extension is safe iff $\max_e (f_P - \lambda_e) > 0$, i.e. iff $f_P > \min_e \lambda_e$. Negate; dualise for the left. $\square$
 
@@ -176,13 +216,21 @@ Applying (10) at both ends before emitting repairs this in constant time per win
 
 $\lambda = (S_{\mathrm{out}} - I)f$ is linear in $f$ with a constant matrix, so substituting back into (5) collapses both arguments into a bilinear form:
 
-$$f_P \;=\; f^\top\!\left[\,T^\top\delta_{u_1} - (S_{\mathrm{out}} - I)\,x_P\,\right]. \tag{11}$$
+$$
+\begin{array}{rl}
+\displaystyle f_P \;=\; f^\top\!\left[\,T^\top\delta_{u_1} - (S_{\mathrm{out}} - I)\,x_P\,\right]. & \qquad (11)
+\end{array}
+$$
 
 Linear in $f$ for a fixed path; linear in $x_P$ for a fixed flow. The bracket is therefore $\partial f_P/\partial f$ in closed form: coordinate $e$ is $+1$ if $e$ leaves $u_1$, minus the number of $e$'s out-siblings lying on $P$. Where the flow is produced by an upstream procedure, a safety margin is an explicit differentiable function of the edge weights.
 
 **Linear-programmatic form.** Relaxing $x_P$ to a unit $s$–$t$ flow gives
 
-$$\max_x \; f_{\mathrm{out}}(s) - \lambda^\top x \quad\text{s.t.}\quad (H-T)x = \delta_t - \delta_s,\; x \ge 0. \tag{12}$$
+$$
+\begin{array}{rl}
+\displaystyle \max_x \; f_{\mathrm{out}}(s) - \lambda^\top x \quad\text{s.t.}\quad (H-T)x = \delta_t - \delta_s,\; x \ge 0. & \qquad (12)
+\end{array}
+$$
 
 The incidence matrix of a digraph is totally unimodular and $G$ is acyclic, so every vertex of that polytope is integral and is an $s$–$t$ path: the LP optimum *is* the maximum-excess path, with no rounding gap and no relaxation error. Replacing $\min$ by a softmin in the closure of §7 makes the construction differentiable, interpolating between the tropical certificate and a sum-product average.
 
@@ -192,13 +240,21 @@ The incidence matrix of a digraph is totally unimodular and $G$ is acyclic, so e
 
 Set $L_{uv} = \min\{\lambda_e : e = (u,v)\}$, $+\infty$ if no such edge, and $L_{vv} = 0$. In the **tropical semiring** ($\oplus = \min$, $\otimes = +$) the closure
 
-$$L^{*} \;=\; \bigoplus_{k \ge 0} L^{\otimes k} \;=\; (I \oplus L)^{\otimes(n-1)} \tag{13}$$
+$$
+\begin{array}{rl}
+\displaystyle L^{*} \;=\; \bigoplus_{k \ge 0} L^{\otimes k} \;=\; (I \oplus L)^{\otimes(n-1)} & \qquad (13)
+\end{array}
+$$
 
 terminates on a DAG.
 
 **Proposition 4.** $L^*_{uv}$ is the minimum total leak over all $u \rightsquigarrow v$ paths, and
 
-$$F \;=\; f_{\mathrm{out}}\mathbf{1}^\top - L^{*}, \qquad \mathrm{Safe} = [F > 0], \tag{14}$$
+$$
+\begin{array}{rl}
+\displaystyle F \;=\; f_{\mathrm{out}}\mathbf{1}^\top - L^{*}, \qquad \mathrm{Safe} = [F > 0], & \qquad (14)
+\end{array}
+$$
 
 where $F_{uv}$ is the maximum excess flow attainable by any path from $u$ to $v$.
 
@@ -214,7 +270,11 @@ The dense product is the *statement*; the evaluation is a topological relaxation
 
 Normalise the flow to the row-stochastic $M_{uv} = f(u,v)/f_{\mathrm{out}}(u)$ — the flow-following walk. The product along a path,
 
-$$R(P) \;=\; f(e_1)\prod_{j\ge 2} M_{e_j}, \tag{15}$$
+$$
+\begin{array}{rl}
+\displaystyle R(P) \;=\; f(e_1)\prod_{j\ge 2} M_{e_j}, & \qquad (15)
+\end{array}
+$$
 
 is the mass traversing $P$ under **proportional splitting**. Same DAG, same layered product, different semiring — and the two are ordered.
 
@@ -254,7 +314,11 @@ The pattern: the paper's **local** results — those about one path and its endp
 
 Vitvitskyi, Araújo, Lackenby and Veličković [2] ask which feedforward DAGs make good computational graphs. Indexing entries as (destination, source), and writing $\delta_{i\leftarrow}$, $\delta_{j\to}$ for in- and out-degrees, they define two matrices for $(j,i) \in E$:
 
-$$W_{ij} = 1/\delta_{j\to} \qquad\text{(walk matrix)}, \qquad \Delta_{ij} = 1/\delta_{i\leftarrow} \qquad\text{(diffusion matrix)}. \tag{16}$$
+$$
+\begin{array}{rl}
+\displaystyle W_{ij} = 1/\delta_{j\to} \qquad\text{(walk matrix)}, \qquad \Delta_{ij} = 1/\delta_{i\leftarrow} \qquad\text{(diffusion matrix)}. & \qquad (16)
+\end{array}
+$$
 
 $W$ is the uniform random walk leaving a vertex, normalised by **out-degree**; $\Delta$ is uniform averaging of a vertex's inputs, normalised by **in-degree**. In their words, *"while one normalises by row, the other normalises by column."* From these come **mixing time** (convergence of $W^t$ to stationarity; lower is better) and **minimax fidelity** $\min_i \max_t \Delta^t_{\tau i}$ — over source vertices $i$, the best coefficient that vertex ever attains at the sink $\tau$ (higher is better).
 
@@ -262,7 +326,11 @@ $W$ is the uniform random walk leaving a vertex, normalised by **out-degree**; $
 
 **Proposition 6.** Write $W_e = f(e)/f_{\mathrm{out}}(\mathrm{tail}\,e)$ and $\Delta_e = f(e)/f_{\mathrm{in}}(\mathrm{head}\,e)$ for the flow-weighted entries, which reduce to (16) when the flow splits uniformly. Then
 
-$$\lambda_e = f_{\mathrm{out}}(\mathrm{tail}\,e)\,(1 - W_e), \qquad \mu_e = f_{\mathrm{in}}(\mathrm{head}\,e)\,(1 - \Delta_e). \tag{17}$$
+$$
+\begin{array}{rl}
+\displaystyle \lambda_e = f_{\mathrm{out}}(\mathrm{tail}\,e)\,(1 - W_e), \qquad \mu_e = f_{\mathrm{in}}(\mathrm{head}\,e)\,(1 - \Delta_e). & \qquad (17)
+\end{array}
+$$
 
 *Proof.* Immediate from the definitions in Theorem 1 and Corollary 1. $\square$
 
@@ -272,7 +340,11 @@ The two leak vectors are the **unnormalised complements** of the two matrices: $
 
 **Proposition 7 (the uniform collapse).** Let every vertex other than the sink have out-degree $d$ and let the flow split uniformly, so each such vertex carries a common throughput $\Phi$ and $f(e) = \Phi/d$. Then $\lambda_e = \Phi(1 - 1/d)$, and a path of $\ell$ edges has
 
-$$f_P \;=\; \Phi\big[\,1 - \ell(1 - 1/d)\,\big], \tag{18}$$
+$$
+\begin{array}{rl}
+\displaystyle f_P \;=\; \Phi\big[\,1 - \ell(1 - 1/d)\,\big], & \qquad (18)
+\end{array}
+$$
 
 which is positive iff $\ell - 1 < 1/(d-1)$. For every $d \ge 2$ this forces $\ell = 1$: **no path of two or more edges is safe.**
 
